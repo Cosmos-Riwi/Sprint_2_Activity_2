@@ -1,0 +1,199 @@
+@model GestionRestaurante.Models.Pedido
+@using GestionRestaurante.Models
+@{
+    ViewData["Title"] = "Detalles Pedido";
+}
+
+<div class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-0"><i class="fas fa-eye me-3"></i>Detalles del Pedido</h1>
+                <p class="mb-0 text-muted">Información completa del pedido: <strong>@Model.numero_pedido</strong></p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Volver a Pedidos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Información del Pedido</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-hashtag me-2 text-primary"></i>Número de Pedido
+                                </label>
+                                <div class="info-value">@Model.numero_pedido</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-calendar me-2 text-primary"></i>Fecha del Pedido
+                                </label>
+                                <div class="info-value">@Model.fecha.ToString("dd/MM/yyyy")</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-flag me-2 text-primary"></i>Estado del Pedido
+                                </label>
+                                <div class="info-value">
+                                    @{
+                                        var estadoClass = Model.estado switch
+                                        {
+                                            EstadoPedido.pendiente => "bg-warning",
+                                            EstadoPedido.servido => "bg-success",
+                                            EstadoPedido.cancelado => "bg-danger",
+                                            _ => "bg-secondary"
+                                        };
+                                    }
+                                    <span class="badge @estadoClass fs-6">@Model.estado.ToString().ToUpper()</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-user me-2 text-primary"></i>Cliente
+                                </label>
+                                <div class="info-value">
+                                    @if (Model.Cliente != null)
+                                    {
+                                        <span class="client-display">@Model.Cliente.nombre @Model.Cliente.apellido</span>
+                                    }
+                                    else
+                                    {
+                                        <em class="text-muted">Cliente no encontrado</em>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-envelope me-2 text-primary"></i>Correo del Cliente
+                                </label>
+                                <div class="info-value">
+                                    @if (Model.Cliente != null)
+                                    {
+                                        <i class="fas fa-at me-2"></i>@Model.Cliente.correo
+                                    }
+                                    else
+                                    {
+                                        <em class="text-muted">No disponible</em>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-phone me-2 text-primary"></i>Teléfono del Cliente
+                                </label>
+                                <div class="info-value">
+                                    @if (Model.Cliente != null && !string.IsNullOrEmpty(Model.Cliente.telefono))
+                                    {
+                                        <i class="fas fa-phone me-2"></i>@Model.Cliente.telefono
+                                    }
+                                    else
+                                    {
+                                        <em class="text-muted">No disponible</em>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg me-md-2">
+                            <i class="fas fa-arrow-left me-2"></i>Volver a Pedidos
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg me-md-2">
+                            <i class="fas fa-edit me-2"></i>Editar Pedido
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-lg">
+                            <i class="fas fa-trash me-2"></i>Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<style>
+    .bg-gradient-info {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    
+    .info-item {
+        margin-bottom: 1.5rem;
+    }
+    
+    .info-label {
+        display: block;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .info-value {
+        font-size: 1.1rem;
+        color: #212529;
+        padding: 12px 16px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #4facfe;
+    }
+    
+    .client-display {
+        font-weight: 600;
+        color: #1976d2;
+    }
+    
+    .btn-lg {
+        border-radius: 10px;
+        padding: 12px 30px;
+        font-weight: 600;
+    }
+    
+    .card {
+        border-radius: 15px;
+    }
+    
+    .badge {
+        padding: 8px 16px;
+        border-radius: 20px;
+    }
+</style>
+}
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,78 @@
+@model IEnumerable<GestionRestaurante.Models.Pedido>
+@using GestionRestaurante.Models
+@{
+    ViewData["Title"] = "Pedidos";
+}
+
+<div class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-0"><i class="fas fa-shopping-cart me-3"></i>Gestión de Pedidos</h1>
+                <p class="mb-0 mt-2">Administra los pedidos del restaurante</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a class="btn btn-light btn-lg" asp-action="Create">
+                    <i class="fas fa-plus me-2"></i>Nuevo Pedido
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-hashtag me-2"></i>Número</th>
+                            <th><i class="fas fa-calendar me-2"></i>Fecha</th>
+                            <th><i class="fas fa-info-circle me-2"></i>Estado</th>
+                            <th><i class="fas fa-user me-2"></i>Cliente</th>
+                            <th class="text-center"><i class="fas fa-cogs me-2"></i>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@item.numero_pedido</td>
+                            <td>@item.fecha.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @{
+                                    var estadoClass = item.estado switch
+                                    {
+                                        EstadoPedido.pendiente => "bg-warning",
+                                        EstadoPedido.servido => "bg-success",
+                                        EstadoPedido.cancelado => "bg-danger",
+                                        _ => "bg-secondary"
+                                    };
+                                }
+                                <span class="badge @estadoClass">@item.estado.ToString().ToUpper()</span>
+                            </td>
+                            <td class="fw-bold">@item.Cliente?.nombre @item.Cliente?.apellido</td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.Id" title="Ver detalles">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

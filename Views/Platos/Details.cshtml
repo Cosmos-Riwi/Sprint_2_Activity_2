@@ -1,0 +1,172 @@
+@model GestionRestaurante.Models.Plato
+@using GestionRestaurante.Helpers
+@{
+    ViewData["Title"] = "Detalles Plato";
+}
+
+<div class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-0"><i class="fas fa-eye me-3"></i>Detalles del Plato</h1>
+                <p class="mb-0 text-muted">Información completa del plato: <strong>@Model.nombre</strong></p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Volver al Menú
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-utensils me-2"></i>Información del Plato</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-tag me-2 text-primary"></i>Nombre del Plato
+                                </label>
+                                <div class="info-value">@Model.nombre</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-list me-2 text-primary"></i>Categoría
+                                </label>
+                                <div class="info-value">
+                                    <span class="badge bg-primary fs-6">@Model.categoria.ToString().Replace("_", " ")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-dollar-sign me-2 text-primary"></i>Precio
+                                </label>
+                                <div class="info-value price-display">@PriceHelper.FormatPrice(Model.precio)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-calendar me-2 text-primary"></i>Estado
+                                </label>
+                                <div class="info-value">
+                                    <span class="badge bg-success fs-6">Activo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="info-item">
+                            <label class="info-label">
+                                <i class="fas fa-align-left me-2 text-primary"></i>Descripción
+                            </label>
+                            <div class="info-value description-text">
+                                @if (string.IsNullOrEmpty(Model.descripcion))
+                                {
+                                    <em class="text-muted">Sin descripción disponible</em>
+                                }
+                                else
+                                {
+                                    @Model.descripcion
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg me-md-2">
+                            <i class="fas fa-arrow-left me-2"></i>Volver al Menú
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg me-md-2">
+                            <i class="fas fa-edit me-2"></i>Editar Plato
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-lg">
+                            <i class="fas fa-trash me-2"></i>Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<style>
+    .bg-gradient-info {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    
+    .info-item {
+        margin-bottom: 1.5rem;
+    }
+    
+    .info-label {
+        display: block;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .info-value {
+        font-size: 1.1rem;
+        color: #212529;
+        padding: 12px 16px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #4facfe;
+    }
+    
+    .price-display {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #28a745;
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    }
+    
+    .description-text {
+        line-height: 1.6;
+        min-height: 60px;
+    }
+    
+    .btn-lg {
+        border-radius: 10px;
+        padding: 12px 30px;
+        font-weight: 600;
+    }
+    
+    .card {
+        border-radius: 15px;
+    }
+    
+    .badge {
+        padding: 8px 16px;
+        border-radius: 20px;
+    }
+</style>
+}
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

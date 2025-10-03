@@ -1,0 +1,146 @@
+@model GestionRestaurante.Models.Cliente
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<div class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-0"><i class="fas fa-edit me-3"></i>Editar Cliente</h1>
+                <p class="mb-0 text-muted">Modifica la información del cliente: <strong>@Model.nombre @Model.apellido</strong></p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Volver a Clientes
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-warning text-white">
+                    <h5 class="mb-0"><i class="fas fa-users me-2"></i>Información del Cliente</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit">
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="nombre" class="form-label fw-bold">
+                                    <i class="fas fa-user me-2 text-primary"></i>Nombre
+                                </label>
+                                <input asp-for="nombre" class="form-control form-control-lg" placeholder="Ej: Juan" />
+                                <span asp-validation-for="nombre" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="apellido" class="form-label fw-bold">
+                                    <i class="fas fa-user me-2 text-primary"></i>Apellido
+                                </label>
+                                <input asp-for="apellido" class="form-control form-control-lg" placeholder="Ej: Pérez" />
+                                <span asp-validation-for="apellido" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="correo" class="form-label fw-bold">
+                                    <i class="fas fa-envelope me-2 text-primary"></i>Correo Electrónico
+                                </label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="fas fa-at text-muted"></i>
+                                    </span>
+                                    <input asp-for="correo" class="form-control border-start-0" placeholder="juan.perez@email.com" type="email" />
+                                </div>
+                                <span asp-validation-for="correo" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="telefono" class="form-label fw-bold">
+                                    <i class="fas fa-phone me-2 text-primary"></i>Teléfono
+                                </label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="fas fa-phone text-muted"></i>
+                                    </span>
+                                    <input asp-for="telefono" class="form-control border-start-0" placeholder="3001234567" />
+                                </div>
+                                <span asp-validation-for="telefono" class="text-danger"></span>
+                                <div class="form-text">Número de teléfono opcional</div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg me-md-2">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-warning btn-lg">
+                                <i class="fas fa-save me-2"></i>Actualizar Cliente
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<style>
+    .bg-gradient-warning {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    
+    .form-control-lg, .form-select-lg {
+        border-radius: 10px;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control-lg:focus, .form-select-lg:focus {
+        border-color: #f093fb;
+        box-shadow: 0 0 0 0.2rem rgba(240, 147, 251, 0.25);
+    }
+    
+    .input-group-text {
+        border-radius: 10px 0 0 10px;
+    }
+    
+    .input-group .form-control {
+        border-radius: 0 10px 10px 0;
+    }
+    
+    .btn-lg {
+        border-radius: 10px;
+        padding: 12px 30px;
+        font-weight: 600;
+    }
+    
+    .card {
+        border-radius: 15px;
+    }
+    
+    .form-label {
+        color: #495057;
+        margin-bottom: 8px;
+    }
+    
+    .form-text {
+        color: #6c757d;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+</style>
+}
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

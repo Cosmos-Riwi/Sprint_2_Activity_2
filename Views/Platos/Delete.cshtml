@@ -1,0 +1,170 @@
+@model GestionRestaurante.Models.Plato
+@using GestionRestaurante.Helpers
+@{
+    ViewData["Title"] = "Eliminar Plato";
+}
+
+<div class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-0"><i class="fas fa-exclamation-triangle me-3 text-danger"></i>Eliminar Plato</h1>
+                <p class="mb-0 text-muted">Confirma la eliminación del plato: <strong>@Model.nombre</strong></p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Volver al Menú
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 border-danger">
+                <div class="card-header bg-gradient-danger text-white">
+                    <h5 class="mb-0"><i class="fas fa-trash me-2"></i>Confirmar Eliminación</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+                        <i class="fas fa-exclamation-triangle me-3 fs-4"></i>
+                        <div>
+                            <strong>¡Atención!</strong> Esta acción no se puede deshacer. El plato será eliminado permanentemente del menú.
+                        </div>
+                    </div>
+                    
+                    <h6 class="text-muted mb-3">Información del plato a eliminar:</h6>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-tag me-2 text-primary"></i>Nombre del Plato
+                                </label>
+                                <div class="info-value">@Model.nombre</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-list me-2 text-primary"></i>Categoría
+                                </label>
+                                <div class="info-value">
+                                    <span class="badge bg-primary fs-6">@Model.categoria.ToString().Replace("_", " ")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-dollar-sign me-2 text-primary"></i>Precio
+                                </label>
+                                <div class="info-value price-display">@PriceHelper.FormatPrice(Model.precio)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <div class="info-item">
+                                <label class="info-label">
+                                    <i class="fas fa-align-left me-2 text-primary"></i>Descripción
+                                </label>
+                                <div class="info-value">
+                                    @if (string.IsNullOrEmpty(Model.descripcion))
+                                    {
+                                        <em class="text-muted">Sin descripción</em>
+                                    }
+                                    else
+                                    {
+                                        @Model.descripcion
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form asp-action="Delete" class="mt-4">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg me-md-2">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="fas fa-trash me-2"></i>Eliminar Definitivamente
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<style>
+    .bg-gradient-danger {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    }
+    
+    .info-item {
+        margin-bottom: 1rem;
+    }
+    
+    .info-label {
+        display: block;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 5px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .info-value {
+        font-size: 1rem;
+        color: #212529;
+        padding: 8px 12px;
+        background: #f8f9fa;
+        border-radius: 6px;
+        border-left: 3px solid #ff6b6b;
+    }
+    
+    .price-display {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #28a745;
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    }
+    
+    .btn-lg {
+        border-radius: 10px;
+        padding: 12px 30px;
+        font-weight: 600;
+    }
+    
+    .card {
+        border-radius: 15px;
+    }
+    
+    .badge {
+        padding: 6px 12px;
+        border-radius: 15px;
+    }
+    
+    .alert {
+        border-radius: 10px;
+        border: none;
+    }
+</style>
+}
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

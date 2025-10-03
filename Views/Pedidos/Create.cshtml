@@ -1,0 +1,125 @@
+@model GestionRestaurante.Models.Pedido
+@using GestionRestaurante.Models
+@{
+    ViewData["Title"] = "Crear Pedido";
+}
+
+<div class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-0"><i class="fas fa-plus-circle me-3"></i>Crear Nuevo Pedido</h1>
+                <p class="mb-0 text-muted">Registra un nuevo pedido en el sistema del restaurante</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Volver a Pedidos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-gradient-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Información del Pedido</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="numero_pedido" class="form-label fw-bold">
+                                    <i class="fas fa-hashtag me-2 text-primary"></i>Número de Pedido
+                                </label>
+                                <input asp-for="numero_pedido" class="form-control form-control-lg" placeholder="Ej: P001" />
+                                <span asp-validation-for="numero_pedido" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="fecha" class="form-label fw-bold">
+                                    <i class="fas fa-calendar me-2 text-primary"></i>Fecha del Pedido
+                                </label>
+                                <input asp-for="fecha" class="form-control form-control-lg" type="date" />
+                                <span asp-validation-for="fecha" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="estado" class="form-label fw-bold">
+                                    <i class="fas fa-flag me-2 text-primary"></i>Estado del Pedido
+                                </label>
+                                <select asp-for="estado" class="form-select form-select-lg" asp-items="Html.GetEnumSelectList<EstadoPedido>()">
+                                    <option value="">Selecciona un estado</option>
+                                </select>
+                                <span asp-validation-for="estado" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="cliente_id" class="form-label fw-bold">
+                                    <i class="fas fa-user me-2 text-primary"></i>Cliente
+                                </label>
+                                <select asp-for="cliente_id" class="form-select form-select-lg" asp-items="ViewBag.ClienteId">
+                                    <option value="">Selecciona un cliente</option>
+                                </select>
+                                <span asp-validation-for="cliente_id" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg me-md-2">
+                                <i class="fas fa-times me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-save me-2"></i>Guardar Pedido
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<style>
+    .bg-gradient-success {
+        background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+    }
+    
+    .form-control-lg, .form-select-lg {
+        border-radius: 10px;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control-lg:focus, .form-select-lg:focus {
+        border-color: #56ab2f;
+        box-shadow: 0 0 0 0.2rem rgba(86, 171, 47, 0.25);
+    }
+    
+    .btn-lg {
+        border-radius: 10px;
+        padding: 12px 30px;
+        font-weight: 600;
+    }
+    
+    .card {
+        border-radius: 15px;
+    }
+    
+    .form-label {
+        color: #495057;
+        margin-bottom: 8px;
+    }
+</style>
+}
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

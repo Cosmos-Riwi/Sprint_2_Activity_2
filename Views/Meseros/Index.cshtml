@@ -1,0 +1,70 @@
+@model IEnumerable<GestionRestaurante.Models.Mesero>
+@{
+    ViewData["Title"] = "Meseros";
+}
+
+<div class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="mb-0"><i class="fas fa-user-tie me-3"></i>Gestión de Meseros</h1>
+                <p class="mb-0 mt-2">Administra el personal de servicio del restaurante</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a class="btn btn-light btn-lg" asp-action="Create">
+                    <i class="fas fa-plus me-2"></i>Nuevo Mesero
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-user me-2"></i>Nombre</th>
+                            <th><i class="fas fa-user me-2"></i>Apellido</th>
+                            <th><i class="fas fa-clock me-2"></i>Turno</th>
+                            <th><i class="fas fa-star me-2"></i>Experiencia</th>
+                            <th class="text-center"><i class="fas fa-cogs me-2"></i>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@item.nombre</td>
+                            <td class="fw-bold">@item.apellido</td>
+                            <td>
+                                <span class="badge bg-primary">@item.turno</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-success">@item.anos_experiencia años</span>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.Id" title="Ver detalles">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
