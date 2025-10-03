@@ -1,0 +1,46 @@
+@model Customer
+
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4>Confirmar Eliminación</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <strong>¿Estás seguro de que deseas eliminar este cliente?</strong>
+                    <p>Esta acción eliminará también todos los pedidos y reservas asociados. Esta acción no se puede deshacer.</p>
+                </div>
+                
+                <dl class="row">
+                    <dt class="col-sm-3">Nombre Completo:</dt>
+                    <dd class="col-sm-9">@Model.FullName</dd>
+                    
+                    <dt class="col-sm-3">Nombre:</dt>
+                    <dd class="col-sm-9">@Model.FirstName</dd>
+                    
+                    <dt class="col-sm-3">Apellido:</dt>
+                    <dd class="col-sm-9">@Model.LastName</dd>
+                    
+                    <dt class="col-sm-3">Correo Electrónico:</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+                    
+                    <dt class="col-sm-3">Teléfono:</dt>
+                    <dd class="col-sm-9">@Model.Phone</dd>
+                </dl>
+                
+                <form asp-action="Delete" method="post">
+                    <input asp-for="Id" type="hidden" />
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-danger">Eliminar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+@model IEnumerable<Customer>
+
+@{
+    ViewData["Title"] = "Gestión de Clientes";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gestión de Clientes</h2>
+    <a asp-action="Create" class="btn btn-primary">
+        Nuevo Cliente
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de Clientes</h5>
+    </div>
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre Completo</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var customer in Model)
+                        {
+                            <tr>
+                                <td>@customer.Id</td>
+                                <td>@customer.FullName</td>
+                                <td>
+                                    @customer.Email
+                                </td>
+                                <td>
+                                    @customer.Phone
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@customer.Id" class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                                            Ver
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@customer.Id" class="btn btn-sm btn-outline-secondary" title="Editar">
+                                            Editar
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@customer.Id" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                            Eliminar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <h5 class="text-light">No hay clientes registrados</h5>
+                <p class="text-muted">Comienza agregando tu primer cliente</p>
+            </div>
+        }
+    </div>
+</div>

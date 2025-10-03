@@ -1,0 +1,83 @@
+@model IEnumerable<Dish>
+
+@{
+    ViewData["Title"] = "Gestión de Platos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gestión de Platos</h2>
+    <a asp-action="Create" class="btn btn-primary">
+        Nuevo Plato
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de Platos</h5>
+    </div>
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var dish in Model)
+                        {
+                            <tr>
+                                <td>@dish.Id</td>
+                                <td>@dish.Name</td>
+                                <td>
+                                    @switch (dish.Category)
+                                    {
+                                        case DishCategory.Appetizer:
+                                            <span class="badge">Entrada</span>
+                                            break;
+                                        case DishCategory.MainCourse:
+                                            <span class="badge">Plato Fuerte</span>
+                                            break;
+                                        case DishCategory.Dessert:
+                                            <span class="badge">Postre</span>
+                                            break;
+                                        case DishCategory.Beverage:
+                                            <span class="badge">Bebida</span>
+                                            break;
+                                    }
+                                </td>
+                                <td>$@dish.Price.ToString("F2")</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@dish.Id" class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                                            Ver
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@dish.Id" class="btn btn-sm btn-outline-secondary" title="Editar">
+                                            Editar
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@dish.Id" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                            Eliminar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <h5 class="text-light">No hay platos registrados</h5>
+                <p class="text-muted">Comienza agregando tu primer plato</p>
+            </div>
+        }
+    </div>
+</div>

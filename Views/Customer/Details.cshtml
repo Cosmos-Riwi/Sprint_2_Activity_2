@@ -1,0 +1,44 @@
+@model Customer
+
+@{
+    ViewData["Title"] = "Detalles del Cliente";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Detalles del Cliente: @Model.FullName</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">ID:</dt>
+                    <dd class="col-sm-9">@Model.Id</dd>
+                    
+                    <dt class="col-sm-3">Nombre Completo:</dt>
+                    <dd class="col-sm-9">@Model.FullName</dd>
+                    
+                    <dt class="col-sm-3">Nombre:</dt>
+                    <dd class="col-sm-9">@Model.FirstName</dd>
+                    
+                    <dt class="col-sm-3">Apellido:</dt>
+                    <dd class="col-sm-9">@Model.LastName</dd>
+                    
+                    <dt class="col-sm-3">Correo Electrónico:</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+                    
+                    <dt class="col-sm-3">Teléfono:</dt>
+                    <dd class="col-sm-9">@Model.Phone</dd>
+                </dl>
+                
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+@model Reservation
+
+@{
+    ViewData["Title"] = "Crear Reserva";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Crear Nueva Reserva</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="ReservationDate" class="form-label">Fecha de la Reserva</label>
+                                <input asp-for="ReservationDate" type="date" class="form-control" />
+                                <span asp-validation-for="ReservationDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="ReservationTime" class="form-label">Hora de la Reserva</label>
+                                <input asp-for="ReservationTime" type="time" class="form-control" />
+                                <span asp-validation-for="ReservationTime" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="CustomerId" class="form-label">Cliente</label>
+                                <select asp-for="CustomerId" class="form-select" asp-items="@(new SelectList(ViewBag.Customers, "Id", "FullName"))">
+                                    <option value="">Seleccionar Cliente</option>
+                                </select>
+                                <span asp-validation-for="CustomerId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="NumberOfPeople" class="form-label">Número de Personas</label>
+                                <input asp-for="NumberOfPeople" type="number" min="1" max="50" class="form-control" />
+                                <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="Notes" class="form-label">Observaciones</label>
+                        <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Observaciones adicionales..."></textarea>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Crear Reserva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

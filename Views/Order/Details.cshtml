@@ -1,0 +1,53 @@
+@model Order
+
+@{
+    ViewData["Title"] = "Detalles del Pedido";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Detalles del Pedido #@Model.OrderNumber</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Número de Pedido:</dt>
+                    <dd class="col-sm-9">@Model.OrderNumber</dd>
+                    
+                    <dt class="col-sm-3">Cliente:</dt>
+                    <dd class="col-sm-9">@(Model.Customer?.FullName ?? "N/A")</dd>
+                    
+                    <dt class="col-sm-3">Email del Cliente:</dt>
+                    <dd class="col-sm-9">@(Model.Customer?.Email ?? "N/A")</dd>
+                    
+                    <dt class="col-sm-3">Teléfono del Cliente:</dt>
+                    <dd class="col-sm-9">@(Model.Customer?.Phone ?? "N/A")</dd>
+                    
+                    <dt class="col-sm-3">Fecha del Pedido:</dt>
+                    <dd class="col-sm-9">@Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</dd>
+                    
+                    <dt class="col-sm-3">Estado:</dt>
+                    <dd class="col-sm-9">
+                        <span class="badge">
+                            @(Model.Status.ToString() switch {
+                                "Pending" => "Pendiente",
+                                "Served" => "Servido",
+                                "Cancelled" => "Cancelado",
+                                _ => Model.Status.ToString()
+                            })
+                        </span>
+                    </dd>
+                </dl>
+                
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

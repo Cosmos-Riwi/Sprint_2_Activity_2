@@ -1,0 +1,58 @@
+@model Reservation
+
+@{
+    ViewData["Title"] = "Detalles de la Reserva";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Detalles de la Reserva #@Model.Id</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">ID de Reserva:</dt>
+                    <dd class="col-sm-9">#@Model.Id</dd>
+                    
+                    <dt class="col-sm-3">Cliente:</dt>
+                    <dd class="col-sm-9">@(Model.Customer?.FullName ?? "N/A")</dd>
+                    
+                    <dt class="col-sm-3">Email del Cliente:</dt>
+                    <dd class="col-sm-9">@(Model.Customer?.Email ?? "N/A")</dd>
+                    
+                    <dt class="col-sm-3">Teléfono del Cliente:</dt>
+                    <dd class="col-sm-9">@(Model.Customer?.Phone ?? "N/A")</dd>
+                    
+                    <dt class="col-sm-3">Fecha:</dt>
+                    <dd class="col-sm-9">@Model.ReservationDate.ToString("dd/MM/yyyy")</dd>
+                    
+                    <dt class="col-sm-3">Hora:</dt>
+                    <dd class="col-sm-9">@Model.ReservationTime.ToString(@"hh\:mm")</dd>
+                    
+                    <dt class="col-sm-3">Fecha y Hora Completa:</dt>
+                    <dd class="col-sm-9">@Model.FullDateTime.ToString("dd/MM/yyyy HH:mm")</dd>
+                    
+                    <dt class="col-sm-3">Número de Personas:</dt>
+                    <dd class="col-sm-9">
+                        <span class="badge">@Model.NumberOfPeople personas</span>
+                    </dd>
+                    
+                    @if (!string.IsNullOrEmpty(Model.Notes))
+                    {
+                        <dt class="col-sm-3">Observaciones:</dt>
+                        <dd class="col-sm-9">@Model.Notes</dd>
+                    }
+                </dl>
+                
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

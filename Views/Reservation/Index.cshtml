@@ -1,0 +1,56 @@
+@model IEnumerable<Reservation>
+
+@{
+    ViewData["Title"] = "Gestión de Reservas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Gestión de Reservas</h2>
+    <a asp-action="Create" class="btn btn-primary">Crear Nueva Reserva</a>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Personas</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reservation in Model)
+                {
+                    <tr>
+                        <td>#@reservation.Id</td>
+                        <td>@(reservation.Customer?.FullName ?? "N/A")</td>
+                        <td>@reservation.ReservationDate.ToString("dd/MM/yyyy")</td>
+                        <td>@reservation.ReservationTime.ToString(@"hh\:mm")</td>
+                        <td>
+                            <span class="badge">@reservation.NumberOfPeople personas</span>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="Details" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-primary">Ver</a>
+                                <a asp-action="Edit" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@reservation.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="text-center py-5">
+        <h5 class="text-light">No hay reservas registradas</h5>
+        <p class="text-muted">Comienza creando tu primera reserva</p>
+    </div>
+}

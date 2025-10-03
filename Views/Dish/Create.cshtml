@@ -1,0 +1,76 @@
+@model Dish
+
+@{
+    ViewData["Title"] = "Crear Plato";
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5>Crear Nuevo Plato</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="Name" class="form-label">
+                            Nombre del Plato
+                        </label>
+                        <input asp-for="Name" class="form-control" placeholder="Ingrese el nombre del plato" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="Description" class="form-label">
+                            Descripción
+                        </label>
+                        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Descripción del plato (opcional)"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Price" class="form-label">
+                                    Precio
+                                </label>
+                                <input asp-for="Price" class="form-control" type="number" step="0.01" min="0.01" placeholder="0.00" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Category" class="form-label">
+                                    Categoría
+                                </label>
+                                <select asp-for="Category" class="form-control">
+                                    <option value="">Seleccione una categoría</option>
+                                    <option value="@DishCategory.Appetizer">Entrada</option>
+                                    <option value="@DishCategory.MainCourse">Plato Fuerte</option>
+                                    <option value="@DishCategory.Dessert">Postre</option>
+                                    <option value="@DishCategory.Beverage">Bebida</option>
+                                </select>
+                                <span asp-validation-for="Category" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            Volver a la Lista
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            Crear Plato
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

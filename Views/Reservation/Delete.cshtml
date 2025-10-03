@@ -1,0 +1,57 @@
+@model Reservation
+
+@{
+    ViewData["Title"] = "Eliminar Reserva";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4>Confirmar Eliminación</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <strong>¿Estás seguro de que deseas eliminar esta reserva?</strong>
+                    <p>Esta acción no se puede deshacer.</p>
+                </div>
+                
+                <dl class="row">
+                    <dt class="col-sm-3">ID de Reserva:</dt>
+                    <dd class="col-sm-9">#@Model.Id</dd>
+                    
+                    <dt class="col-sm-3">Cliente:</dt>
+                    <dd class="col-sm-9">@(Model.Customer?.FullName ?? "N/A")</dd>
+                    
+                    <dt class="col-sm-3">Email del Cliente:</dt>
+                    <dd class="col-sm-9">@(Model.Customer?.Email ?? "N/A")</dd>
+                    
+                    <dt class="col-sm-3">Fecha:</dt>
+                    <dd class="col-sm-9">@Model.ReservationDate.ToString("dd/MM/yyyy")</dd>
+                    
+                    <dt class="col-sm-3">Hora:</dt>
+                    <dd class="col-sm-9">@Model.ReservationTime.ToString(@"hh\:mm")</dd>
+                    
+                    <dt class="col-sm-3">Número de Personas:</dt>
+                    <dd class="col-sm-9">
+                        <span class="badge">@Model.NumberOfPeople personas</span>
+                    </dd>
+                    
+                    @if (!string.IsNullOrEmpty(Model.Notes))
+                    {
+                        <dt class="col-sm-3">Observaciones:</dt>
+                        <dd class="col-sm-9">@Model.Notes</dd>
+                    }
+                </dl>
+                
+                <form asp-action="Delete" method="post">
+                    <input asp-for="Id" type="hidden" />
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-danger">Eliminar Reserva</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

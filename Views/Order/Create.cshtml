@@ -1,0 +1,66 @@
+@model Order
+
+@{
+    ViewData["Title"] = "Crear Pedido";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Crear Nuevo Pedido</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="OrderNumber" class="form-label">Número de Pedido</label>
+                                <input asp-for="OrderNumber" class="form-control" placeholder="Ej: PED-001" />
+                                <span asp-validation-for="OrderNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="OrderDate" class="form-label">Fecha del Pedido</label>
+                                <input asp-for="OrderDate" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="OrderDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="CustomerId" class="form-label">Cliente</label>
+                                <select asp-for="CustomerId" class="form-select" asp-items="@(new SelectList(ViewBag.Customers, "Id", "FullName"))">
+                                    <option value="">Seleccionar Cliente</option>
+                                </select>
+                                <span asp-validation-for="CustomerId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Status" class="form-label">Estado</label>
+                                <select asp-for="Status" class="form-select" asp-items="@Html.GetEnumSelectList<OrderStatus>()">
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Crear Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

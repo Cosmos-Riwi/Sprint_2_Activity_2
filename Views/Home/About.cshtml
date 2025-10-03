@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Acerca de - Sistema de Restaurante";
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h2>Acerca del Sistema de Restaurante</h2>
+            </div>
+            <div class="card-body">
+                <h4>Descripción</h4>
+                <p class="card-text">
+                    Sistema completo de gestión de restaurante desarrollado con ASP.NET Core MVC y PostgreSQL. 
+                    Permite administrar todas las operaciones diarias del restaurante de manera eficiente y moderna.
+                </p>
+                
+                <h4>Características Principales</h4>
+                <ul>
+                    <li><strong>Gestión de Clientes:</strong> Administración completa de información de clientes</li>
+                    <li><strong>Control de Meseros:</strong> Gestión del personal de servicio con turnos y experiencia</li>
+                    <li><strong>Menú de Platos:</strong> Administración del menú con categorías y precios</li>
+                    <li><strong>Pedidos:</strong> Control de órdenes con estados y seguimiento</li>
+                    <li><strong>Reservas:</strong> Sistema de reservas de mesa con fecha y hora</li>
+                </ul>
+                
+                <h4>Tecnologías Utilizadas</h4>
+                <ul>
+                    <li><strong>Backend:</strong> ASP.NET Core 8.0 MVC</li>
+                    <li><strong>Base de Datos:</strong> PostgreSQL con Npgsql</li>
+                    <li><strong>Frontend:</strong> Bootstrap 5, HTML5, CSS3</li>
+                    <li><strong>Patrón:</strong> MVC con Repository Pattern</li>
+                </ul>
+                
+                <h4>Funcionalidades</h4>
+                <ul>
+                    <li>Operaciones CRUD completas para todas las entidades</li>
+                    <li>Validaciones robustas de datos</li>
+                    <li>Interfaz responsive y moderna</li>
+                    <li>Manejo de errores y mensajes de feedback</li>
+                    <li>Relaciones entre entidades bien definidas</li>
+                </ul>
+                
+                <div class="text-center mt-4">
+                    <a asp-action="Index" class="btn btn-primary">Volver al Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

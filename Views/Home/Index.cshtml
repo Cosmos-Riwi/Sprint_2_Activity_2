@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "Dashboard - Sistema de Restaurante";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="text-center mb-5">
+            <h1 class="display-4 mb-3">Sistema de Restaurante</h1>
+            <p class="lead">Gestión completa de tu restaurante</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Clientes</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Administra la información de tus clientes.</p>
+                <a href="@Url.Action("Index", "Customer")" class="btn btn-primary">
+                    Gestionar Clientes
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Meseros</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Controla el personal de servicio.</p>
+                <a href="@Url.Action("Index", "Waiter")" class="btn btn-primary">
+                    Gestionar Meseros
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Platos</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Administra el menú del restaurante.</p>
+                <a href="@Url.Action("Index", "Dish")" class="btn btn-primary">
+                    Gestionar Platos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Pedidos</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Controla los pedidos de los clientes.</p>
+                <a href="@Url.Action("Index", "Order")" class="btn btn-primary">
+                    Gestionar Pedidos
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5>Reservas</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Administra las reservas de mesas.</p>
+                <a href="@Url.Action("Index", "Reservation")" class="btn btn-primary">
+                    Gestionar Reservas
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
