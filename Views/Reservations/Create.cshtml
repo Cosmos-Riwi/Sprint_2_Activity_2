@@ -1,0 +1,36 @@
+@model Pedrito.Models.Reservation
+@{
+    ViewData["Title"] = "Create Reservation";
+    var clients = ViewBag.Clients as List<Pedrito.Models.Client>;
+}
+<h2>Create Reservation</h2>
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="ReservationDate" class="form-label"></label>
+        <input asp-for="ReservationDate" class="form-control" type="date" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ReservationTime" class="form-label"></label>
+        <input asp-for="ReservationTime" class="form-control" type="time" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="PartySize" class="form-label"></label>
+        <input asp-for="PartySize" class="form-control" type="number" min="1" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <input asp-for="Notes" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ClientId" class="form-label">Client</label>
+        <select asp-for="ClientId" class="form-control">
+            <option value="">Select a client</option>
+            @foreach (var client in clients)
+            {
+                <option value="@client.Id">@client.FirstName @client.LastName</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

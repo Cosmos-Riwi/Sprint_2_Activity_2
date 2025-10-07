@@ -1,0 +1,15 @@
+@model Pedrito.Models.Dish
+@{
+    ViewData["Title"] = "Dish Details";
+}
+<h2>Dish Details</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text"><strong>Description:</strong> @Model.Description</p>
+        <p class="card-text"><strong>Price:</strong> @Model.Price</p>
+        <p class="card-text"><strong>Category:</strong> @Model.Category</p>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    </div>
+</div>

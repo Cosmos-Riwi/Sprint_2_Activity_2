@@ -1,0 +1,37 @@
+@model IEnumerable<Pedrito.Models.Waiter>
+@{
+    ViewData["Title"] = "Waiters List";
+}
+<h2>Waiters</h2>
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success">@TempData["message"]</div>
+}
+<a asp-action="Create" class="btn btn-primary mb-2">Add Waiter</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Shift</th>
+            <th>Years Experience</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var waiter in Model)
+    {
+        <tr>
+            <td>@waiter.FirstName</td>
+            <td>@waiter.LastName</td>
+            <td>@waiter.Shift</td>
+            <td>@waiter.YearsExperience</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@waiter.Id" class="btn btn-info btn-sm">Details</a>
+                <a asp-action="Edit" asp-route-id="@waiter.Id" class="btn btn-warning btn-sm">Edit</a>
+                <a asp-action="Delete" asp-route-id="@waiter.Id" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

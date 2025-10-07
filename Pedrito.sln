@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pedrito", "Pedrito.csproj", "{843CB7FB-5614-FB05-2BD0-DC4F7D7D9EDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{843CB7FB-5614-FB05-2BD0-DC4F7D7D9EDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843CB7FB-5614-FB05-2BD0-DC4F7D7D9EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843CB7FB-5614-FB05-2BD0-DC4F7D7D9EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843CB7FB-5614-FB05-2BD0-DC4F7D7D9EDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E043A69C-E493-4571-84A4-7BA6E4FC9FF2}
+	EndGlobalSection
+EndGlobal

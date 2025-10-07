@@ -1,0 +1,15 @@
+@model Pedrito.Models.Order
+@{
+    ViewData["Title"] = "Order Details";
+}
+<h2>Order Details</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Order #: @Model.OrderNumber</h5>
+        <p class="card-text"><strong>Date:</strong> @Model.OrderDate</p>
+        <p class="card-text"><strong>Status:</strong> @Model.Status</p>
+        <p class="card-text"><strong>Client:</strong> @Model.Client?.FirstName @Model.Client?.LastName</p>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    </div>
+</div>

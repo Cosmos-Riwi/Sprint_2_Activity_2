@@ -1,0 +1,26 @@
+@model Pedrito.Models.Waiter
+@{
+    ViewData["Title"] = "Edit Waiter";
+}
+<h2>Edit Waiter</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Shift" class="form-label"></label>
+        <input asp-for="Shift" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="YearsExperience" class="form-label"></label>
+        <input asp-for="YearsExperience" class="form-control" type="number" min="0" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

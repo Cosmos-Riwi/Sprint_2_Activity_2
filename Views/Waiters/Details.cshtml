@@ -1,0 +1,14 @@
+@model Pedrito.Models.Waiter
+@{
+    ViewData["Title"] = "Waiter Details";
+}
+<h2>Waiter Details</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+        <p class="card-text"><strong>Shift:</strong> @Model.Shift</p>
+        <p class="card-text"><strong>Years Experience:</strong> @Model.YearsExperience</p>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    </div>
+</div>

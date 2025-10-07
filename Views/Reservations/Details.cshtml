@@ -1,0 +1,15 @@
+@model Pedrito.Models.Reservation
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+<h2>Reservation Details</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.ReservationDate.ToShortDateString() @Model.ReservationTime</h5>
+        <p class="card-text"><strong>Party Size:</strong> @Model.PartySize</p>
+        <p class="card-text"><strong>Notes:</strong> @Model.Notes</p>
+        <p class="card-text"><strong>Client:</strong> @Model.Client?.FirstName @Model.Client?.LastName</p>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    </div>
+</div>
